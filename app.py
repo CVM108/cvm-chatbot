@@ -9,7 +9,10 @@ st.title("Chatbot de Srila Prabhupada 🕉️")  # Línea 6 corregida
 pregunta = st.text_input("Haz tu pregunta espiritual:")  # Línea 7 corregida
 
 if pregunta:
-    respuesta = citas[citas["pregunta"].str.contains(pregunta, case=False)]  # Línea 9 corregida
+   # respuesta = citas[citas["pregunta"].str.contains(pregunta, case=False)]  # Línea 9 corregida
+   # Reemplaza la línea de búsqueda actual con:
+pregunta_limpia = pregunta.lower().strip("¿?¡!")  # Normaliza el texto
+respuesta = citas[citas["pregunta"].str.lower().str.contains(pregunta_limpia, regex=False)]
     if not respuesta.empty:  # Línea 10 corregida
         st.success(f"**Respuesta:** {respuesta.iloc[0]['respuesta']} (*{respuesta.iloc[0]['fuente']}*)")  # Línea 11 corregida
     else:
